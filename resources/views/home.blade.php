@@ -3,5 +3,5 @@
 @section('title', 'Home')
 
 @section('content')
-    <h1>página principal</h1>
+    <h1>página principal modificada</h1>
 @endsection
