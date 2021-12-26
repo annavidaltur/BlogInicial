@@ -28,6 +28,8 @@ Route::get('cursos/{id}', [CursoController::class, 'show'])->name('cursos.show')
 
 Route::get('cursos/{curso}/edit', [CursoController::class, 'edit'])->name('cursos.edit');
 
+Route::put('cursos/{curso}', [CursoController::class, 'update'])->name('cursos.update');
+
 // Laraval 7
 // Route::get('/', 'HomeController');
 // Route::get('cursos', 'CursoController@index');
