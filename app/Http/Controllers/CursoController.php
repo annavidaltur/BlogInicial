@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Curso;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreCurso;
 
 class CursoController extends Controller
 {
@@ -16,30 +17,24 @@ class CursoController extends Controller
         return view('cursos.create');
     }
 
-    public function store(Request $request){ // almacenar elemento
-        $request->validate([
-            'name' => 'required',
-            'description' => 'required',
-            'categoria' => 'required',
-        ]);
+    public function store(StoreCurso $request){ // almacenar elemento
+        // $curso = new Curso();
+        // $curso->name = $request->name;
+        // $curso->description = $request->description;
+        // $curso->categoria = $request->categoria;
+        // $curso->save();
 
-        $curso = new Curso();
-        $curso->name = $request->name;
-        $curso->description = $request->descripcion;
-        $curso->categoria = $request->categoria;
-
-        $curso->save();
-
-        return redirect()->route('cursos.show', $curso->id);
+        $curso = Curso::create($request->all()); // Fa el mateix que el mazacote anterior
+        return redirect()->route('cursos.show', $curso);
     }
 
-    public function show($id){ // mostrar elemento
-        $curso = Curso::find($id);
+    public function show(Curso $curso){ // mostrar elemento
         return view('cursos.show', compact('curso'));
     }
 
-    // Equivalent amb menys codi
-    // public function show(Curso $curso){ // mostrar elemento
+    // Equivalent amb més codi
+    // public function show($id){ // mostrar elemento
+    //     $curso = Curso::find($id);
     //     return view('cursos.show', compact('curso'));
     // }
 
@@ -54,12 +49,12 @@ class CursoController extends Controller
             'categoria' => 'required',
         ]);
 
-        $curso->name = $request->name;
-        $curso->description = $request->descripcion;
-        $curso->categoria = $request->categoria;
-
-        $curso->save();
-
+        $curso->update($request->all());
         return redirect()->route('cursos.show', $curso->id);
+    }
+
+    public function destroy(Curso $curso){ // eliminar elemento
+        $curso->delete();
+        return redirect()->route('cursos.index');
     }
 }
