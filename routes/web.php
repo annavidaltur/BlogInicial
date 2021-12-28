@@ -16,9 +16,11 @@ use App\Http\Controllers\CursoController;
 */
 
 // Laravel 8
-Route::get('/', HomeController::class);
+Route::get('/', HomeController::class)->name('home');
 
 Route::resource('cursos', CursoController::class);
+
+Route::view('nosotros', 'nosotros')->name('nosotros');
 
 // Route::get('cursos', [CursoController::class, 'index'])->name('cursos.index');
 

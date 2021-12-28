@@ -17,4 +17,14 @@ class Curso extends Model
     protected $guarded = [];
     
     // protected $table = "users"; // d'esta manera administraria la taula users a través el model Curso
+
+   /**
+     * Get the primary key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName() // Per a generar url amigable
+    {
+        return 'slug';
+    }
 }
